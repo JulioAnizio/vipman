@@ -33,6 +33,45 @@
     .btn-header { background: var(--gold); color: var(--black) !important; padding: 9px 22px; opacity: 1 !important; font-weight: 600 !important; letter-spacing: 1.5px !important; }
     .btn-header:hover { background: var(--gold-light) !important; }
 
+    .hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--gold);
+  transition: all 0.3s;
+}
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,10,10,0.97);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.nav-mobile a {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-mobile a:hover { color: var(--gold); }
+.nav-mobile.open { display: flex; }
+@media (max-width: 900px) {
+  .hamburger { display: flex; }
+}
+
     /* HERO */
     #hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; text-align: center; padding: 120px 24px 80px; }
     .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%); }
@@ -186,6 +225,17 @@
     <a href="#contato">Contato</a>
     <a href="https://vipman.online" class="btn-header" target="_blank">Comprar Agora</a>
   </nav>
+<div class="hamburger" onclick="toggleMenu()">
+  <span></span><span></span><span></span>
+</div>
+
+<nav class="nav-mobile" id="navMobile">
+  <a href="#colecao" onclick="toggleMenu()">Coleção</a>
+  <a href="#sobre" onclick="toggleMenu()">Nossa História</a>
+  <a href="#contato" onclick="toggleMenu()">Contato</a>
+  <a href="https://vipman.online" target="_blank" onclick="toggleMenu()">Comprar Agora</a>
+</nav>
+
 </header>
 
 <section id="hero">
@@ -358,6 +408,11 @@
 </a>
 
 <script>
+
+function toggleMenu() {
+  document.getElementById('navMobile').classList.toggle('open');
+}
+
   window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     header.style.padding = window.scrollY > 60 ? '12px 48px' : '18px 48px';
